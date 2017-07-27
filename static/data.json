@@ -1,0 +1,39 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "title": "first title",
+      "body": "console.log(x)",
+      "answers": [ "ans1", "ans2", "ans3", "ans4"],
+      "correctAnswer": 1
+    },
+    {
+      "id": 2,
+      "title": "second title",
+      "body": "second body",
+      "answers": [ "ans1", "ans2", "ans3", "ans4"],
+      "correctAnswer": 1
+    },
+    {
+      "id": 3,
+      "title": "third title",
+      "body": "third body",
+      "answers": [ "ans1", "ans2", "ans3", "ans4"],
+      "correctAnswer": 1
+    },
+    {
+      "id": 4,
+      "title": "forth title",
+      "body": "forth body",
+      "answers": [ "ans1", "ans2", "ans3", "ans4"],
+      "correctAnswer": 1
+    },
+    {
+      "id": 5,
+      "title": "fifth title",
+      "body": "fifth body",
+      "answers": [ "ans1", "ans2", "ans3", "ans4"],
+      "correctAnswer": 1
+    }
+  ]
+}
