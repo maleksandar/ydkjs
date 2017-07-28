@@ -2,7 +2,7 @@
   <div> 
     <div class='row content-wrapper'>
       <h2> {{ content.title }} </h2>
-      <pre><code class='question-body'> {{ content.body }}</code> </pre>
+      <pre><code class='question-body'>{{content.body }}</code> </pre>
     </div>
     <div class='row'> 
       <div v-for="(answer, index) in content.answers" :key="answer" class="col-md-3 button-wrapper"> 
@@ -14,16 +14,18 @@
     </div>
     <div class='row question-explanation'>
       <p class='well' v-if="answered">
-          some code explanation
+          {{ explanation }}
       </p>
     </div>
   </div>
 </template>
 
 <script>
+import Vue from 'vue';
+
 export default {
   name: 'question',
-  props: ['content'],
+  props: ['id'],
   mounted() {
     document.querySelectorAll('pre code')
       .forEach(element => window.hljs.highlightBlock(element));
@@ -38,25 +40,46 @@ export default {
         'answer3',
         'answer4',
       ],
-      answered: false,
-      answeredCorrect: null,
     };
+  },
+  computed: {
+    content() {
+      return this.$store.state.questions[this.id];
+    },
+    correctAnswer() {
+      return this.content.correctAnswer;
+    },
+    answeredCorrect() {
+      return this.content.answeredCorrect;
+    },
+    givenAnswer() {
+      return this.content.givenAnswer;
+    },
+    answered() {
+      return this.content.answered;
+    },
+    explanation() {
+      return this.content.explanation;
+    },
   },
   methods: {
     giveAnswer(givenAnswer) {
-      console.log(givenAnswer);
-      this.answered = true;
-      this.givenAnswer = givenAnswer;
-      this.answeredCorrect = givenAnswer === this.content.correctAnswer;
+      console.log(givenAnswer, this.content.correctAnswer);
+      Vue.set(this.content, 'answered', true);
+      Vue.set(this.content, 'givenAnswer', givenAnswer);
+      Vue.set(this.content, 'answeredCorrect', this.givenAnswer === this.content.correctAnswer);
     },
     success(index) {
-      return this.answeredCorrect && this.content.correctAnswer === index;
+      return this.answeredCorrect
+        && this.correctAnswer === index;
     },
     failWrong(index) {
-      return this.answeredCorrect === false && this.givenAnswer === index;
+      return this.answeredCorrect === false
+        && this.givenAnswer === index;
     },
     failCorrect(index) {
-      return this.answeredCorrect === false && this.content.correctAnswer === index;
+      return this.content.answeredCorrect === false
+        && this.content.correctAnswer === index;
     },
   },
 };
