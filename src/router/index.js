@@ -13,7 +13,7 @@ export default new Router({
       component: Quiz,
     },
     {
-      path: 'result',
+      path: '/result',
       name: 'Result',
       component: Result,
     },

@@ -64,7 +64,6 @@ export default {
   },
   methods: {
     giveAnswer(givenAnswer) {
-      console.log(givenAnswer, this.content.correctAnswer);
       Vue.set(this.content, 'answered', true);
       Vue.set(this.content, 'givenAnswer', givenAnswer);
       Vue.set(this.content, 'answeredCorrect', this.givenAnswer === this.content.correctAnswer);

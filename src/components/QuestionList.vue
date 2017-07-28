@@ -6,17 +6,19 @@
       {{Math.floor(currentProgress)}}% Complete
     </div>
   </div>
-  <div class='col-md-2'> <button class="btn btn-primary" :disabled="currentIndex === 0" @click="previous()"> << </button> </div>
+  <div class='col-md-2'> <button class="btn btn-primary" :disabled="currentIndex === 0" @click="previous()"> <i class="fa fa-arrow-left" aria-hidden="true"></i> </button> </div>
   <div class='col-md-8'>
     <question v-for='(q, index) in questions' :key="q.id" :id='[index]' v-if='currentIndex === index'> </question>
   </div>
-  <div class='col-md-2'> <button class="btn btn-primary" :disabled='!answered' @click="next()"> >> </button> </div>
+  <div class='col-md-2'> 
+    <router-link v-if='this.currentIndex + 1 === this.questions.length && answered' to="/result" tag='button' class="btn btn-primary">Go to Result</router-link>
+    <button v-else class="btn btn-primary" :disabled='!answered' @click="next()"> <i class="fa fa-arrow-right" aria-hidden="true"></i> </button> 
+  </div>
 </div>
 </template>
 
 <script>
 import Question from './Question';
-import bus from '../bus';
 
 export default {
   components: {
@@ -40,10 +42,6 @@ export default {
   },
   methods: {
     next() {
-      if (this.currentIndex + 1 === this.questions.length) {
-        console.log('requestResults emmited');
-        bus.$emit('requestResults');
-      }
       if (this.currentIndex < this.questions.length - 1) {
         this.currentIndex += 1;
       }

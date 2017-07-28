@@ -9,7 +9,6 @@
 <script>
 import QuestionList from './QuestionList';
 import Results from './Results';
-import bus from '../bus';
 
 export default {
   name: 'quiz',
@@ -19,7 +18,7 @@ export default {
   },
   data() {
     return {
-      msg: 'Welcome to Your Vue.js App',
+      msg: 'You don\'t know JS',
       lookBack: false,
       resultsRequested: false,
     };
@@ -40,10 +39,6 @@ export default {
       this.lookBack = false;
     },
   },
-  created() {
-    bus.$on('requestResults', this.requestResults);
-    bus.$on('lookBackRequested', this.lookBackRequested);
-  },
 };
 </script>
 
@@ -51,6 +46,7 @@ export default {
 <style scoped>
 h1, h2 {
   font-weight: normal;
+  font-size: 25px
 }
 
 ul {
